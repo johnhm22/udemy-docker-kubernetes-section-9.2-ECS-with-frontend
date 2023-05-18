@@ -1,0 +1,21 @@
+FROM amd64/node:16-alpine AS build
+
+WORKDIR /app
+
+COPY package.json .
+
+RUN npm install
+
+COPY . .
+
+CMD [ "npm", "run", "build" ]
+
+RUN npm run build
+
+FROM amd64/nginx:stable-alpine-slim
+
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
