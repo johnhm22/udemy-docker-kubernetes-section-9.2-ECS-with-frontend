@@ -28,6 +28,7 @@ app.get('/goals', async (req, res) => {
         text: goal.text,
       })),
     });
+    console.log("goals: ", goals);
     console.log('FETCHED GOALS');
   } catch (err) {
     console.error('ERROR FETCHING GOALS');
@@ -37,7 +38,7 @@ app.get('/goals', async (req, res) => {
 });
 
 app.post('/goals', async (req, res) => {
-  console.log('TRYING TO STORE GOAL');
+  console.log(' TO STORE GOAL');
   const goalText = req.body.text;
 
   if (!goalText || goalText.trim().length === 0) {
@@ -63,7 +64,7 @@ app.post('/goals', async (req, res) => {
 });
 
 app.delete('/goals/:id', async (req, res) => {
-  console.log('TRYING TO DELETE GOAL');
+  console.log(' TO DELETE GOAL');
   try {
     await Goal.deleteOne({ _id: req.params.id });
     res.status(200).json({ message: 'Deleted goal!' });
