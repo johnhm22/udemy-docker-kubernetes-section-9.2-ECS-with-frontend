@@ -14,10 +14,12 @@ function App() {
             ? 'http//:localhost'
             : 'http://goals-node-load-balancer-1690117.eu-west-2.elb.amazonaws.com';
 
+    console.log('backendUrl: ', backendUrl);
+
     useEffect(function () {
         async function fetchData() {
             setIsLoading(true);
-
+            console.log('inside useEffect in App.js frontend');
             try {
                 const response = await fetch(backendUrl + '/goals');
 
